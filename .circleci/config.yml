@@ -52,7 +52,7 @@ jobs:
           name: "Copy plugin"
           command: |
             mkdir ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
-            cp -r /tmp/SamplePlugin ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
+            cp -r SamplePlugin ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
       - run:
           name: "Build project"
           command: |
