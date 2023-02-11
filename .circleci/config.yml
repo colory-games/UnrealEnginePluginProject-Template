@@ -83,7 +83,7 @@ jobs:
               -unattended \
               -nopause \
               -NullRHI \
-              -ExecCmds="Automation RunTests UnitTestExample" \
+              -ExecCmds="Automation RunTests UnitTestExample; Quit" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
               -ReportOutputPath="/tmp/UnitTestsReport"
