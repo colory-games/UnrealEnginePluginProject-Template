@@ -56,17 +56,15 @@ jobs:
       - run:
           name: "Unit test against Plugin"
           command: |
-            /home/ue4/UnrealEngine/Engine/Binaries/Linux/UE4Editor \
+            /home/ue4/UnrealEngine/Engine/Binaries/Linux/UnrealEditor \
               ${PWD}/tests/unit_tests/UnitTestProejct/UnitTestProejct.uproject \
-              -RenderOffscreen \
-              -windowed \
               -unattended \
               -nopause \
               -NullRHI \
               -ExecCmds="Automation RunTests UnitTestExample" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
-              -ReportOutputPath="/tmp/Saved/UnitTestsReport"
+              -ReportOutputPath="/tmp/UnitTestsReport"
 
   build-plugin:
     parameters:
