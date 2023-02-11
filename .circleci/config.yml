@@ -58,6 +58,8 @@ jobs:
           command: |
             /home/ue4/UnrealEngine/Engine/Binaries/Linux/UE4Editor \
               ${PWD}/tests/unit_tests/UnitTestProejct/UnitTestProejct.uproject \
+              -RenderOffscreen \
+              -windowed \
               -unattended \
               -nopause \
               -NullRHI \
