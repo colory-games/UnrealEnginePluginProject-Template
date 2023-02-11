@@ -49,17 +49,32 @@ jobs:
           name: "Run scripts for the release"
           command: bash tools/replace_engine_version.sh SamplePlugin << parameters.unreal-engine-version >>
       - run:
-          name: "Build Plugin"
-          command: |
-            /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildPlugin \
-              -Plugin=${PWD}/SamplePlugin/SamplePlugin.uplugin \
-              -Package=/tmp/SamplePlugin \
-              -Rocket
-      - run:
           name: "Copy plugin"
           command: |
             mkdir ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
             cp -r /tmp/SamplePlugin ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
+      - run:
+          name: "Build project"
+          command: |
+            /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
+              -utf8output \
+              -platform=Linux \
+              -clientconfig=Shipping \
+              -serverconfig=Shipping \
+              -project=${PWD}/tests/unit_tests/UnitTestProejct/UnitTestProejct.uproject \
+              -noP4 \
+              -nodebuginfo \
+              -allmaps \
+              -cook \
+              -build \
+              -stage \
+              -prereqs \
+              -pak \
+              -archive \
+              -archivedirectory=/tmp/Packaged
+      - run:
+          name: "LS"
+          command: ls /tmp/Packagd
       - run:
           name: "Unit test against Plugin"
           command: |
