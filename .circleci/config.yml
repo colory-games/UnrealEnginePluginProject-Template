@@ -2,7 +2,7 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - unittest-plugin:
+      - unit-test-plugin:
           context:
             - unreal-engine-ci
           matrix:
@@ -26,7 +26,7 @@ workflows:
 
 version: 2.1
 jobs:
-  unittest-plugin:
+  unit-test-plugin:
     parameters:
       unreal-engine-version:
         type: string
@@ -51,25 +51,20 @@ jobs:
       - run:
           name: "Copy plugin sources"
           command: |
-            mkdir ${PWD}/tests/unittests/UnitTestProject/Plugins
-            cp -r SamplePlugin ${PWD}/tests/unittests/UnitTestProject/Plugins
+            mkdir ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
+            cp -r SamplePlugin ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
       - run:
-          name: "Unittest against Plugin"
+          name: "Unit test against Plugin"
           command: |
-            /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh \
-              -utf8output \
-              -platform=Linux \
-              -project=${PWD}/tests/unittests/UnitTestProject/UnitTestProject.uproject \
-              -game \
-              -buildmacine \
-              -stdout \
-              -fullstdoutlogoutput \
-              -forcelogflush \
+            /home/ue4/UnrealEngine/Engine/Binaries/Linux/UE4Editor \
+              ${PWD}/tests/unit_tests/UnitTestProejct/UnitTestProejct.uproject \
               -unattended \
               -nopause \
-              -nullrhi \
-              -nosplash \
-              -ExecCmds="automation -list; quit"
+              -NullRHI \
+              -ExecCmds="Automation RunTests UnitTestExample" \
+              -testexit="Automation Test Queue Empty" \
+              -log=RunTests.log \
+              -ReportOutputPath="/tmp/Saved/UnitTestsReport"
 
   build-plugin:
     parameters:
