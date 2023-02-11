@@ -2,6 +2,13 @@ workflows:
   version: 2.1
   build:
     jobs:
+      - unittest-plugin:
+          context:
+            - unreal-engine-ci
+          matrix:
+            parameters:
+              unreal-engine-version: ["5.1.0"]
+              version: ["full"]
       - build-plugin:
           context:
             - unreal-engine-ci
@@ -19,6 +26,51 @@ workflows:
 
 version: 2.1
 jobs:
+  unittest-plugin:
+    parameters:
+      unreal-engine-version:
+        type: string
+      version:
+        type: string
+    docker:
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< parameters.unreal-engine-version >>
+        auth:
+          username: $GHCR_USERNAME
+          password: $GHCR_PASSWORD
+    steps:
+      - checkout
+      - run:
+          name: Run scripts for the license removing
+          command: bash tools/remove_license.sh SamplePlugin << parameters.version >>
+      - run:
+          name: Run scripts for the code removing
+          command: bash tools/remove_code.sh SamplePlugin << parameters.unreal-engine-version >> << parameters.version >> .
+      - run:
+          name: "Run scripts for the release"
+          command: bash tools/replace_engine_version.sh SamplePlugin << parameters.unreal-engine-version >>
+      - run:
+          name: "Copy plugin sources"
+          command: |
+            mkdir ${PWD}/tests/unittests/UnitTestProject/Plugins
+            cp -r SamplePlugin ${PWD}/tests/unittests/UnitTestProject/Plugins
+      - run:
+          name: "Unittest against Plugin"
+          command: |
+            /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh \
+              -utf8output \
+              -platform=Linux \
+              -project=${PWD}/tests/unittests/UnitTestProject/UnitTestProject.uproject \
+              -game \
+              -buildmacine \
+              -stdout \
+              -fullstdoutlogoutput \
+              -forcelogflush \
+              -unattended \
+              -nopause \
+              -nullrhi \
+              -nosplash \
+              -ExecCmds="automation -list; quit"
+
   build-plugin:
     parameters:
       unreal-engine-version:
