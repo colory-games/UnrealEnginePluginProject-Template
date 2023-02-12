@@ -80,7 +80,7 @@ jobs:
               -unattended \
               -nopause \
               -NullRHI \
-              -ExecCmds="Automation RunTests FunctionalTestExample; Quit" \
+              -ExecCmds="Automation RunTests TestSample; Quit" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
               -ReportOutputPath="/tmp/FunctionalTestsReport"
