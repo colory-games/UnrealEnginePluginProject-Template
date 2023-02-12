@@ -8,7 +8,7 @@
 #include "FunctionalTestGameModeBase.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class FUNCTIONALTEST_API AFunctionalTestGameModeBase : public AGameModeBase
