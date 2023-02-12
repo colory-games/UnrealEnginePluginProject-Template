@@ -20,8 +20,11 @@ bool FTestSample::RunTest(const FString& Parameters)
 	for (TFieldIterator<UFunction> It(GeneratedClass); It; ++It)
 	{
 		UFunction* Function = *It;
-		if (Function->GetFName().ToString().StartsWith("Test_"))
+		FString Category = Function->GetMetaData("Category");
+		if (Category == "UnitTest")
 		{
+			TestEqual(TEXT("Unit test does not have 'CallInEditor' flag."), Function->GetMetaData("CallInEditor"), "true");
+
 			struct FParameters
 			{
 				int32 ReturnValue = 0;
