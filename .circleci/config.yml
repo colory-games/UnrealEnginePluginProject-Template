@@ -59,8 +59,8 @@ jobs:
             /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
               -utf8output \
               -platform=Linux \
-              -clientconfig=Development \
-              -serverconfig=Development \
+              -clientconfig=Shipping \
+              -serverconfig=Shipping \
               -project=${PWD}/tests/functional_test/FunctionalTest/FunctionalTest.uproject \
               -noP4 \
               -nodebuginfo \
