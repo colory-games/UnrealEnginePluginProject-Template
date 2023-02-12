@@ -4,8 +4,8 @@
 #include "GameFramework/Actor.h"
 #include "Misc/AutomationTest.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTestSample, "TestSample.TestSample Test",
-	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter);
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FTestSample, "TestSample.TestSample Test", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter);
 
 bool FTestSample::RunTest(const FString& Parameters)
 {

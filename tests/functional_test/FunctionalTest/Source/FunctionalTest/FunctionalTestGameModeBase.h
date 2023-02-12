@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+
 #include "FunctionalTestGameModeBase.generated.h"
 
 /**
@@ -13,5 +14,4 @@ UCLASS()
 class FUNCTIONALTEST_API AFunctionalTestGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
 };
