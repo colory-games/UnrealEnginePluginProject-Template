@@ -51,8 +51,8 @@ jobs:
       - run:
           name: "Copy plugin"
           command: |
-            mkdir ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
-            cp -r SamplePlugin ${PWD}/tests/unit_tests/UnitTestProejct/Plugins
+            mkdir ${PWD}/tests/unit_tests/UnitTestProject/Plugins
+            cp -r SamplePlugin ${PWD}/tests/unit_tests/UnitTestProject/Plugins
       - run:
           name: "Build project"
           command: |
@@ -61,7 +61,7 @@ jobs:
               -platform=Linux \
               -clientconfig=Shipping \
               -serverconfig=Shipping \
-              -project=${PWD}/tests/unit_tests/UnitTestProejct/UnitTestProejct.uproject \
+              -project=${PWD}/tests/unit_tests/UnitTestProject/UnitTestProject.uproject \
               -noP4 \
               -nodebuginfo \
               -allmaps \
@@ -73,13 +73,10 @@ jobs:
               -archive \
               -archivedirectory=/tmp/Packaged
       - run:
-          name: "LS"
-          command: ls /tmp/Packaged
-      - run:
           name: "Unit test against Plugin"
           command: |
             /home/ue4/UnrealEngine/Engine/Binaries/Linux/UnrealEditor \
-              ${PWD}/tests/unit_tests/UnitTestProejct/UnitTestProejct.uproject \
+              ${PWD}/tests/unit_tests/UnitTestProject/UnitTestProject.uproject \
               -unattended \
               -nopause \
               -NullRHI \

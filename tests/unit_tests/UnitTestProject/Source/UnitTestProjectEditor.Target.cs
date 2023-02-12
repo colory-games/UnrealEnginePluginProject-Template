@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class UnitTestProejctTarget : TargetRules
+public class UnitTestProjectEditorTarget : TargetRules
 {
-	public UnitTestProejctTarget( TargetInfo Target) : base(Target)
+	public UnitTestProjectEditorTarget( TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Game;
+		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
-		ExtraModuleNames.Add("UnitTestProejct");
+		ExtraModuleNames.Add("UnitTestProject");
 	}
 }

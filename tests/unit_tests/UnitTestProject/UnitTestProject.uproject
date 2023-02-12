@@ -5,7 +5,7 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "UnitTestProejct",
+			"Name": "UnitTestProject",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
