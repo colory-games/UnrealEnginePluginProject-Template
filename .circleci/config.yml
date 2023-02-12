@@ -21,7 +21,7 @@ workflows:
             - unreal-engine-ci
           matrix:
             parameters:
-              unreal-engine-version: ["5.0.0"]
+              unreal-engine-version: ["5.1.0"]
               version: ["full"]
 
 version: 2.1
