@@ -45,8 +45,8 @@ jobs:
         run: |
           bash tests/lint/clang-format/run.sh samples/SampleProject
 
-  unit-test-clang-format:
-    name: unit-test-clang-format
+  functional-test-clang-format:
+    name: functional-test-clang-format
     runs-on: ubuntu-latest
     container:
       image: ubuntu:20.04
@@ -61,7 +61,7 @@ jobs:
 
       - name: clang-format
         run: |
-          bash tests/lint/clang-format/run.sh tests/unit_tests/UnitTestProject
+          bash tests/lint/clang-format/run.sh tests/functional_test/FunctionalTest
 
   crlf-check:
     name: crlf-check

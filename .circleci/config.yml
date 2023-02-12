@@ -2,7 +2,7 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - unit-test-plugin:
+      - functional-test-plugin:
           context:
             - unreal-engine-ci
           matrix:
@@ -26,7 +26,7 @@ workflows:
 
 version: 2.1
 jobs:
-  unit-test-plugin:
+  functional-test-plugin:
     parameters:
       unreal-engine-version:
         type: string
@@ -51,8 +51,8 @@ jobs:
       - run:
           name: "Copy plugin"
           command: |
-            mkdir ${PWD}/tests/unit_tests/UnitTestProject/Plugins
-            cp -r SamplePlugin ${PWD}/tests/unit_tests/UnitTestProject/Plugins
+            mkdir ${PWD}/tests/functional_test/FunctionalTest/Plugins
+            cp -r SamplePlugin ${PWD}/tests/functional_test/FunctionalTest/Plugins
       - run:
           name: "Build project"
           command: |
@@ -61,7 +61,7 @@ jobs:
               -platform=Linux \
               -clientconfig=Shipping \
               -serverconfig=Shipping \
-              -project=${PWD}/tests/unit_tests/UnitTestProject/UnitTestProject.uproject \
+              -project=${PWD}/tests/functional_test/FunctionalTest/FunctionalTest.uproject \
               -noP4 \
               -nodebuginfo \
               -allmaps \
@@ -76,14 +76,14 @@ jobs:
           name: "Unit test against Plugin"
           command: |
             /home/ue4/UnrealEngine/Engine/Binaries/Linux/UnrealEditor \
-              ${PWD}/tests/unit_tests/UnitTestProject/UnitTestProject.uproject \
+              ${PWD}/tests/functional_test/FunctionalTest/FunctionalTest.uproject \
               -unattended \
               -nopause \
               -NullRHI \
-              -ExecCmds="Automation RunTests UnitTestExample; Quit" \
+              -ExecCmds="Automation RunTests FunctionalTestExample; Quit" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
-              -ReportOutputPath="/tmp/UnitTestsReport"
+              -ReportOutputPath="/tmp/FunctionalTestsReport"
 
   build-plugin:
     parameters:
